@@ -422,6 +422,20 @@
       }
     },
     {
+      "type": "view",
+      "qualifier": {
+        "entity": "testing",
+        "testcase": "6e8390ec-view"
+      },
+      "description": "Provides a view for testcase '6e8390ec'",
+      "properties": {
+        "path": "testing/view-6e8390ec",
+        "title": "Testing View",
+        "heading": "6e8390ec",
+        "cssClass": "e2e-view-6e8390ec"
+      }
+    },
+    {
       "type": "popup",
       "qualifier": {
         "entity": "testing"
@@ -730,6 +744,13 @@
       "qualifier": {
         "entity": "contact",
         "id": "5"
+      }
+    },
+    {
+      "type": "view",
+      "qualifier": {
+        "entity": "testing",
+        "testcase": "*"
       }
     },
     {

@@ -22,6 +22,7 @@ import { TestcaseB6a8fe23ViewPO } from './page-object/testcase-b6a8fe23-view.po'
 import { Testcase5782ab19ViewPO } from './page-object/testcase-5782ab19-view.po';
 import { Testcase68f302b4ViewPO } from './page-object/testcase-68f302b4-view-po';
 import { TestcaseC985a55bViewPO } from './page-object/testcase-c985a55b-view.po';
+import { Testcase6e8390ecViewPO } from './page-object/testcase-6e8390ec-view.po';
 
 describe('View', () => {
 
@@ -326,6 +327,42 @@ describe('View', () => {
         qp2: 'c5a37d3660ba',
       });
     });
+
+    it('should allow to provide query and matrix parameter values with special characted [testcase: 6e8390ec-view]', async () => {
+      await testingViewPO.navigateTo();
+
+      const viewNavigationPO = await testingViewPO.openViewNavigationPanel();
+      await viewNavigationPO.enterQualifier({
+        entity: 'testing',
+        testcase: '6e8390ec-view',
+      });
+      await viewNavigationPO.enterMatrixParams({
+        mp1: '4c871fbd! * \' ( ) ; : @ & = + $ , / ? % # [ ]4c871fbd',
+        mp2: 'bee7e83d! * \' ( ) ; : @ & = + $ , / ? % # [ ]bee7e83d',
+      });
+      await viewNavigationPO.enterQueryParams({
+        qp1: '83bc46c1! * \' ( ) ; : @ & = + $ , / ? % # [ ]83bc46c1',
+        qp2: 'a14351be! * \' ( ) ; : @ & = + $ , / ? % # [ ]a14351be',
+      });
+      await viewNavigationPO.selectTarget('blank');
+      await viewNavigationPO.execute();
+
+      await expectViewToShow({symbolicAppName: 'testing-app', viewCssClass: 'e2e-view-6e8390ec', componentSelector: 'app-view-6e8390ec'});
+
+      const viewPO = new Testcase6e8390ecViewPO();
+      const urlParams = await viewPO.getUrlParameters();
+      await expect(urlParams).toEqual({
+        mp1: '4c871fbd! * \' ( ) ; : @ & = + $ , / ? % # [ ]4c871fbd',
+        mp2: 'bee7e83d! * \' ( ) ; : @ & = + $ , / ? % # [ ]bee7e83d',
+      });
+
+      const urlQueryParams = await viewPO.getUrlQueryParameters();
+      await expect(urlQueryParams).toEqual({
+        qp1: '83bc46c1! * \' ( ) ; : @ & = + $ , / ? % # [ ]83bc46c1',
+        qp2: 'a14351be! * \' ( ) ; : @ & = + $ , / ? % # [ ]a14351be',
+      });
+    });
+
 
     it('should allow to receive query and matrix parameters as specified in the manifest [testcase: c8e40918-view]', async () => {
       await testingViewPO.navigateTo();
